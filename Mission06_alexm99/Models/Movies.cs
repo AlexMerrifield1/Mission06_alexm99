@@ -11,8 +11,12 @@ namespace Mission06_alexm99.Models
         [Key]
         [Required]
         public int MovieID { get; set; }
+        
         [Required]
-        public string Category { get; set; }
+        //Builds Foreign Key Relationship
+        public int CategoryID { get; set; }
+        public Category Category { get; set; }
+       
         [Required]
         public string Title { get; set; }
         [Required]

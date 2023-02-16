@@ -15,15 +15,55 @@ namespace Mission06_alexm99.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.32");
 
+            modelBuilder.Entity("Mission06_alexm99.Models.Category", b =>
+                {
+                    b.Property<int>("CategoryID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("CategoryType")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("CategoryID");
+
+                    b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            CategoryID = 1,
+                            CategoryType = "Action"
+                        },
+                        new
+                        {
+                            CategoryID = 2,
+                            CategoryType = "Comedy"
+                        },
+                        new
+                        {
+                            CategoryID = 3,
+                            CategoryType = "Adventure"
+                        },
+                        new
+                        {
+                            CategoryID = 4,
+                            CategoryType = "Mystery"
+                        },
+                        new
+                        {
+                            CategoryID = 5,
+                            CategoryType = "Crime"
+                        });
+                });
+
             modelBuilder.Entity("Mission06_alexm99.Models.Movies", b =>
                 {
                     b.Property<int>("MovieID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("Category")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                    b.Property<int>("CategoryID")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Director")
                         .IsRequired()
@@ -36,7 +76,8 @@ namespace Mission06_alexm99.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Notes")
-                        .HasColumnType("TEXT");
+                        .HasColumnType("TEXT")
+                        .HasMaxLength(25);
 
                     b.Property<string>("Rating")
                         .IsRequired()
@@ -51,13 +92,15 @@ namespace Mission06_alexm99.Migrations
 
                     b.HasKey("MovieID");
 
+                    b.HasIndex("CategoryID");
+
                     b.ToTable("Movies");
 
                     b.HasData(
                         new
                         {
                             MovieID = 1,
-                            Category = "Comedy,Adventure",
+                            CategoryID = 2,
                             Director = "Terry Gilliam, Terry Jones",
                             Edited = false,
                             Lent_To = "",
@@ -69,7 +112,7 @@ namespace Mission06_alexm99.Migrations
                         new
                         {
                             MovieID = 2,
-                            Category = "Action,Crime,Music",
+                            CategoryID = 5,
                             Director = "Edgar Wright",
                             Edited = false,
                             Lent_To = "",
@@ -81,7 +124,7 @@ namespace Mission06_alexm99.Migrations
                         new
                         {
                             MovieID = 3,
-                            Category = "Action, Thriller",
+                            CategoryID = 1,
                             Director = "Chad Stahelski",
                             Edited = false,
                             Lent_To = "",
@@ -90,6 +133,15 @@ namespace Mission06_alexm99.Migrations
                             Title = "John Wick",
                             Year = 2014
                         });
+                });
+
+            modelBuilder.Entity("Mission06_alexm99.Models.Movies", b =>
+                {
+                    b.HasOne("Mission06_alexm99.Models.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

@@ -33,20 +33,25 @@ namespace Mission06_alexm99.Controllers
         [HttpGet]
         public IActionResult MovieEntry()
         {
+            ViewBag.Categories = _blahContext.Categories.ToList();
             return View();
         }
 
         [HttpPost]
         public IActionResult MovieEntry(Movies me)
-        {
+        { 
             if (ModelState.IsValid)
             {
                 _blahContext.Add(me);
                 _blahContext.SaveChanges();
+                return View();
             }
-                
+            else //If Invalid
+            {
+                ViewBag.Categories = _blahContext.Categories.ToList();
 
-            return View();
+                return View(me);
+            }
         }
 
 
