@@ -25,8 +25,6 @@ namespace Mission06_alexm99.Models
                 new Category { CategoryID = 3, CategoryType = "Adventure" },
                 new Category { CategoryID = 4, CategoryType = "Mystery" },
                 new Category { CategoryID = 5, CategoryType = "Crime" }
-
-
             );
 
             mb.Entity<Movies>().HasData(

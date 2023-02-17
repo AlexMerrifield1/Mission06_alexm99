@@ -9,7 +9,6 @@
 
     <thead class="font-weight-bold">
         <tr>
-            @*Change this to be part of the CategoryID table*@
             <td>Category</td>
             <td>Title</td>
             <td>Year</td>
@@ -22,12 +21,12 @@
     </thead>
 
     <tbody>
-        @*This will pull all the data from the Model i.e. <td>@x.Major.MajorName</td>
-        *@
+        @*This will pull all the data from the Model *@
         @foreach (var x in Model)
         {
             <tr>
-                <td>@x.Category</td>
+                @*<td>test</td>*@
+                <td>@x.Category.CategoryType</td>
                 <td>@x.Title</td>
                 <td>@x.Year</td>
                 <td>@x.Director</td>
@@ -36,8 +35,8 @@
                 <td>@x.Lent_To</td>
                 <td>@x.Notes</td>
 
-                <td><a asp-controller="Home" asp-action="Edit" asp-route-applicationid="@x.MovieID">Edit</a></td>
-                <td><a asp-controller="Home" asp-action="Delete" asp-route-applicationid="@x.MovieID">Delete</a></td>
+                <td><a asp-controller="Home" asp-action="Edit" asp-route-movieid="@x.MovieID">Edit</a></td>
+                <td><a asp-controller="Home" asp-action="Delete" asp-route-movieid="@x.MovieID">Delete</a></td>
 
             </tr>
         }
