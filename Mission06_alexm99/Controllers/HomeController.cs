@@ -36,12 +36,13 @@ namespace Mission06_alexm99.Controllers
 
         [HttpPost]
         public IActionResult MovieEntry(Movies me)
-        { 
+        {
+
             if (ModelState.IsValid)
             {
                 _blahContext.Add(me);
                 _blahContext.SaveChanges();
-                return View();
+                return RedirectToAction("MovieList");
             }
             else //If Invalid
             {
